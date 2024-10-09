@@ -2,64 +2,58 @@
 
 import { useState } from 'react';
 import axios from 'axios';
+import Api from '../Api';
+import { useRouter } from 'next/navigation';
+import Header from "../components/Header.js";
 
 const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/login`;
 
 const LoginPage = () => {
+  const router = useRouter();
   // state to hold form input values
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
 
   // function to handle form input
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    try {
-      const response = await axios.post(apiUrl, { email, password });
-
-      if (response.status === 200) {
-        const { token } = response.data;
-        setMessage(`Login successful! Welcome back, ${email}`);
-        localStorage.setItem('token', token);
-        console.log("JWT Token: ", token);
-      } else {
-        // if log in fails
-        setMessage(`Login failed: #{response.data.error}`);
-      }
-    } catch (error) {
-      console.error("Error: ", error);
+  const handleSubmit = (event) => {
+    Api.Auth.login(email, password).then(response => {
+      const { token } = response.data;
+      localStorage.setItem("Auth-Token", token);
+      setMessage("Success");
+      router.push('/');
+    }).catch(error => {
+      console.error("Login failed: ", error);
       setMessage("An error occurred during login");
-    }
+    });
   };
 
 
   return (
     <main>
+      <Header />
       <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email: </label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password: </label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Login</button>
-      </form>
+      <div>
+        <label htmlFor="email">Email: </label>
+        <input
+          type="email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="password">Password: </label>
+        <input
+          type="password"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+      </div>
+      <button onClick={handleSubmit}>Login</button>
       {message && <p>{message}</p>}
     </main>
   );

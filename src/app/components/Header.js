@@ -1,35 +1,31 @@
 "use client";
 
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import axios from 'axios';
-import { decode } from 'jwt-decode';
+import { useAuth } from '../context/AuthContext';
+import { useState, useEffect } from 'react';
+import Api from '../Api';
 
 const Header = () => {
-  const [user, setUser] = useState(null);
-
-  // get token from client user storage
+  const [user, setUser] = useState();
+  console.log(user);
   useEffect(() => {
-    const token = localStorage.getItem('authToken');
-
-    if (token) {
-      try {
-        // decode token to get user info
-        const decoded = jwtDecode(token);
-        setUser(decoded.email);
-
-      } catch (error) {
-        console.error("Invalid token", error);
-        handleLogout();
-      }
+    console.log("test")
+    if (localStorage.getItem("Auth-Token")) {
+      fetchUser();
     }
-  }, []);
+  }, [])
 
-  const handleLogout = () => {
-    localStorage.removeItem('authToken');
+
+  const fetchUser = () => {
+    Api.Profile.get().then((res) => {
+      setUser(res.data);
+    })
+  }
+
+  const logout = () => {
+    localStorage.removeItem('Auth-Token');
     setUser(null);
-  };
-
+  }
   return (
     <header className="bg-gray-800 text-white py-4 px-6 flex justify-between items-center">
       <h1 className="text-xl font-bold"><Link href="/">SkillSwap</Link></h1>
@@ -37,9 +33,9 @@ const Header = () => {
       <nav className="flex items-center space-x-4">
         {user ? (
           <>
-            <span className="mr-4">Welcome, {user.name}</span>
+            <span className="mr-4">Welcome, {user.email}</span>
             <button
-              onClick={handleLogout}
+              onClick={logout}
               className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
               Log Out
             </button>

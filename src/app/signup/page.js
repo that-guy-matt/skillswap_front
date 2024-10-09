@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import axios from 'axios';
+import Header from "../components/Header.js";
 const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/signup`;
 
 const Signup = () => {
@@ -30,6 +31,7 @@ const Signup = () => {
 
   return (
     <div>
+      <Header />
       <h1>Sign up</h1>
       <form onSubmit={handleSignup}>
         <label htmlFor="email">Email: </label>
