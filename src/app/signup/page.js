@@ -10,6 +10,17 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
 
+  // const handleSignup = (event) => {
+  //   Api.Auth.signup(email, password).then(response => {
+  //     const { token } = response.data;
+  //     localStorage.setItem("Auth-Token", token);
+  //     setMessage("Success");
+  //     router.push('/');
+  //   }).catch(error => {
+  //     console.error("Login failed: ", error);
+  //     setMessage("An error occurred during login");
+  //   });
+  // };
   const handleSignup = async (event) => {
     event.preventDefault();
     try {
