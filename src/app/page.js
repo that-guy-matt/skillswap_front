@@ -13,6 +13,7 @@ const HomePage = () => {
       <Header />
       <h1>Welcome to SkillSwap</h1>
       <MatchList />
+
     </div>
   )
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import axios from "axios";
 import Api from '../Api';
 
 const MatchList = () => {
@@ -11,21 +10,22 @@ const MatchList = () => {
 
   // fetch data when component loads
   useEffect(() => {
-    const fetchUsers = () => {
-      Api.Users.get()
-        .then((response) => {
-          setUsers(response.data);
-          setLoading(false);
-        })
-        .catch((err) => {
-          console.error("Error fetching data: ", err);
-          setError(err.message);
-          setLoading(false);
-        });
-    }
 
     fetchUsers();
   }, []);
+
+  const fetchUsers = () => {
+    Api.Users.get()
+      .then((response) => {
+        setUsers(response.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching data: ", err);
+        setError(err.message);
+        setLoading(false);
+      });
+  }
 
   if (loading) {
     return <div>Loading...</div>;
@@ -49,7 +49,6 @@ const MatchList = () => {
           <tr key={user.id}>
             <td>{user.name}</td>
             <td>{user.email}</td>
-            {/* <td>{user.skills.join(", ")}</td> */}
           </tr>
         )}
       </tbody>

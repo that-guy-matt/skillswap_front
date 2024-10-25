@@ -24,11 +24,11 @@ const Auth = {
 const Users = {
   get: () =>
     axios.get("/users")
-      .then(response => response)
-      .catch(error => {
-        console.error("Error fetching users:", error);
-        throw error;
-      }),
+  // .then(response => response)
+  // .catch(error => {
+  //   console.error("Error fetching users:", error);
+  //   throw error;
+  // }),
 };
 
 export default {
