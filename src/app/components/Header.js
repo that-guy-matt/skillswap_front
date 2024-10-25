@@ -36,16 +36,18 @@ const Header = () => {
             <span className="mr-4">Welcome, {user.email}</span>
             <button
               onClick={logout}
-              className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              className="btn btn-danger">
               Log Out
             </button>
           </>
         ) : (
           <>
-            <Link href="/signup" className="bg-green-500 hover:bg=green=600 p-2 rounded">
+            <Link href="/signup"
+              className="btn btn-secondary">
               Sign Up
             </Link>
-            <Link href="/login" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <Link href="/login"
+              className="btn btn-primary">
               Login
             </Link>
           </>

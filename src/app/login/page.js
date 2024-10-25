@@ -32,29 +32,50 @@ const LoginPage = () => {
   return (
     <main>
       <Header />
-      <h1>Login</h1>
-      <div>
-        <label htmlFor="email">Email: </label>
-        <input
-          type="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-md-6 col-lg-4 mt-5">
+            <div className="card text-center shadow p-2" >
+              <div className='card-header'>
+                <h1 className="card-title fs-4 fw-bold">Login</h1>
+              </div>
+              <div className="card-body">
+                <div className="mb-3">
+                  <label htmlFor="email" className="form-label">Email:</label>
+                  <input
+                    type="email"
+                    id="email"
+                    placeholder='email@example.com'
+                    className="form-control"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="mb-3">
+                  <label htmlFor="password" className="form-label">Password:</label>
+                  <input
+                    type="password"
+                    id="password"
+                    className="form-control"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <button className="btn btn-primary w-75" onClick={handleSubmit}>Log In</button>
+
+                {message && <p className="mt-3">{message}</p>}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
-        <label htmlFor="password">Password: </label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </div>
-      <button onClick={handleSubmit}>Login</button>
-      {message && <p>{message}</p>}
+
     </main>
   );
 };
