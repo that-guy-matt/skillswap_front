@@ -24,15 +24,16 @@ const Auth = {
 const Users = {
   get: () =>
     axios.get("/users")
-  // .then(response => response)
-  // .catch(error => {
-  //   console.error("Error fetching users:", error);
-  //   throw error;
-  // }),
+};
+
+const Skills = {
+  get: () =>
+    axios.get("/skills")
 };
 
 export default {
   Profile,
   Auth,
-  Users
+  Users,
+  Skills,
 };

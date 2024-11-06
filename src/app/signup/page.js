@@ -12,17 +12,22 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [runningSignup, setRunningSignup] = useState(false);
 
   const handleSignup = (event) => {
-    console.log("test2");
+    if (runningSignup) return;
+    setRunningSignup(true);
+
     Api.Auth.signup(email, password).then(response => {
-      // const { token } = response.data;
-      // localStorage.setItem("Auth-Token", token);
-      // setMessage("Success");
-      // router.push('/');
+      const { token } = response.data;
+      localStorage.setItem("Auth-Token", token);
+      setMessage("Success");
+      window.location.replace('/');
     }).catch(error => {
       console.error("Login failed: ", error);
       setMessage("An error occurred during login");
+    }).finally(() => {
+      setRunningSignup(false);
     });
   };
   // const handleSignup = async (event) => {
@@ -81,7 +86,7 @@ const Signup = () => {
                   />
                 </div>
 
-                <button className="btn btn-primary w-75" onClick={handleSignup}>Sign Up</button>
+                <button className="btn btn-primary w-75" onClick={handleSignup} disabled={runningSignup}>Sign Up</button>
 
                 {message && <p className="mt-3">{message}</p>}
               </div>

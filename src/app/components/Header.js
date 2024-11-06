@@ -7,9 +7,9 @@ import Api from '../Api';
 
 const Header = () => {
   const [user, setUser] = useState();
-  console.log(user);
+  // console.log(user);
   useEffect(() => {
-    console.log("test")
+    // console.log("test")
     if (localStorage.getItem("Auth-Token")) {
       fetchUser();
     }
