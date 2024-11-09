@@ -1,13 +1,13 @@
 "use client";
 
 import Link from 'next/link';
-import { useAuth } from '../context/AuthContext';
 import { useState, useEffect } from 'react';
 import Api from '../Api';
 
 const Header = () => {
   const [user, setUser] = useState();
   // console.log(user);
+
   useEffect(() => {
     // console.log("test")
     if (localStorage.getItem("Auth-Token")) {
