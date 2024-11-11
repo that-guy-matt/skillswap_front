@@ -79,7 +79,7 @@ const ProfilePage = () => {
           </Tab>
 
           {/* Contact Info Tab */}
-          <Tab eventKey="contact" title="Contact Info">
+          <Tab eventKey="contact" title="Email">
             <div className="p-3">
               <p><strong>Email:</strong> {user.email}</p>
             </div>

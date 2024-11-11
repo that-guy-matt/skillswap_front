@@ -6,6 +6,14 @@ const Profile = {
     axios.get("profile", {
       params: { token: localStorage.getItem("Auth-Token") }
     }),
+  update: (firstName, lastName, bio, skillsToLearn, skillsToTeach) =>
+    axios.patch("profile", {
+      first_name: firstName,
+      last_name: lastName,
+      bio: bio,
+      skills_to_learn: skillsToLearn,
+      skills_to_teach: skillsToTeach,
+    }),
 };
 
 const Auth = {
